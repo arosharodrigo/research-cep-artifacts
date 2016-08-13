@@ -1,0 +1,25 @@
+/* Enter a unique ExecutionPlan */
+@Plan:name('DEBS2016-Query1')
+
+/* Enter a unique description for ExecutionPlan */
+-- @Plan:description('ExecutionPlan')
+
+/* define streams/tables and write queries here ... */
+
+@Import('inStreamDebs2016q1:1.0.0')
+@config(async = 'true')
+define stream inStreamDebs2016q1 (iij_timestamp long, ts long, user_id long, comment_id long, comment string, user_name string, comment_replied_id long, post_replied_id long, isPostFlag int);
+
+@Export('outStreamDebs2016q1:1.0.0')
+define stream outStreamDebs2016q1 (iij_timestamp long, result string);
+
+
+@info(name = 'query1')
+from inStreamDebs2016q1
+select iij_timestamp, ts, user_id, comment_id, comment, user_name, comment_replied_id, post_replied_id, isPostFlag
+insert into postCommentsStream;
+
+@info(name = 'query2') 
+from postCommentsStream#debs2016:rankerQuery1(iij_timestamp, ts, user_id, comment_id, comment, user_name, comment_replied_id, post_replied_id, isPostFlag)
+select iij_timestamp, result
+insert into outStreamDebs2016q1;

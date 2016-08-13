@@ -1,0 +1,12 @@
+{
+  "name": "outStreamDebs2016q2",
+  "version": "1.0.0",
+  "nickName": "",
+  "description": "",
+  "payloadData": [
+    {
+      "name": "iij_timestamp",
+      "type": "LONG"
+    }
+  ]
+}
