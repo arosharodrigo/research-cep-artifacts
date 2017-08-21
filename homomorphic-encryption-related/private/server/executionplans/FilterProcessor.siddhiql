@@ -1,0 +1,16 @@
+/* Enter a unique ExecutionPlan */
+@Plan:name('FilterProcessor')
+
+/* Enter a unique description for ExecutionPlan */
+-- @Plan:description('FilterExecutionPlan')
+
+/* define streams/tables and write queries here ... */
+
+
+@Import('inputFilterStream:1.0.0')
+define stream inputFilterStream (iij_timestamp long, value long);
+
+@Export('outputFilterStream:1.0.0')
+define stream outputFilterStream (iij_timestamp long, value long);
+
+@name('query 1') @dist(parallel='1', execGroup='filter') from inputFilterStream [ value == 22 ] select iij_timestamp, value insert into outputFilterStream;
