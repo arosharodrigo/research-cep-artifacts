@@ -5,7 +5,7 @@
     <mapping customMapping="disable" type="wso2event"/>
     <to eventAdapterType="wso2event">
         <property name="username">admin</property>
-        <property name="protocol">thrift</property>
+        <property name="protocol">binary</property>
         <property name="publishingMode">non-blocking</property>
         <property name="publishTimeout">0</property>
         <property name="receiverURL">tcp://localhost:7661</property>

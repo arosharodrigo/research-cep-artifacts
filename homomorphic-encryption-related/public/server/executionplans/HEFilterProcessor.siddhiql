@@ -8,9 +8,9 @@
 
 
 @Import('inputHEFilterStream:1.0.0')
-define stream inputHEFilterStream (iij_timestamp long, value string);
+define stream inputHEFilterStream (timestampList string, valueList string, size String);
 
 @Export('outputHEFilterStream:1.0.0')
-define stream outputHEFilterStream (iij_timestamp long, value string);
+define stream outputHEFilterStream (timestampList string, withBonusValueList string, size String);
 
-@name('query 1') @dist(parallel='1', execGroup='filter') from inputHEFilterStream select iij_timestamp, he:add(value, 1L) as value insert into outputHEFilterStream;
+@name('query 1') @dist(parallel='1', execGroup='filter') from inputHEFilterStream select timestampList, he:add(valueList, 22L) as withBonusValueList, size insert into outputHEFilterStream;
